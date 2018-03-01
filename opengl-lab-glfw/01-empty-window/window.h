@@ -8,7 +8,4 @@ protected:
     void paintGL() override;
 
     void keyPressEvent(int key, int mods) override;
-
-private:
-    void printOpenGlVersion();
 };

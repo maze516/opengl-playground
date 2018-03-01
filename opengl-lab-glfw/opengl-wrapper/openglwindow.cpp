@@ -107,6 +107,8 @@ void OpenGLWindow::initializeGL()
         glfwTerminate();
         throw std::runtime_error("Failed to initialize GLAD!");
     }
+
+    printOpenGlVersion();
 }
 
 void OpenGLWindow::resizeGL(int width, int height)
@@ -179,6 +181,16 @@ void OpenGLWindow::windowFocusCallback(GLFWwindow *window, int focused)
         w->m_pauseRendering = true;
         w->focusOutEvent();
     }
+}
+
+void OpenGLWindow::printOpenGlVersion()
+{
+    GLint majorVersion, minorVersion;
+    glGetIntegerv(GL_MAJOR_VERSION, &majorVersion);
+    glGetIntegerv(GL_MINOR_VERSION, &minorVersion);
+
+    DEBUG("OpenGLWindow: loaded OpenGL " <<
+            majorVersion << "." << minorVersion);
 }
 
 void OpenGLWindow::resetFpsCounter()

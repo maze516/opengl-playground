@@ -47,6 +47,8 @@ private:
     static void errorCallback(int code, const char *description);
     static void windowFocusCallback(GLFWwindow *window, int focused);
 
+    void printOpenGlVersion();
+
     void resetFpsCounter();
     void updateFpsCounter();
 };
