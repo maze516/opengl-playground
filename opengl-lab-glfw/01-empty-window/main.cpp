@@ -2,7 +2,7 @@
 
 int main(void)
 {
-    Window window;
+    Window window(640, 480, "01 - Empty Window");
 
     return window.exec();
 }

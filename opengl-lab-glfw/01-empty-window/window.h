@@ -3,6 +3,9 @@
 #include "openglwindow.h"
 
 class Window : public OpenGLWindow {
+public:
+    using OpenGLWindow::OpenGLWindow;
+
 protected:
     void initializeGL() override;
     void paintGL() override;

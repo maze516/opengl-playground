@@ -7,7 +7,9 @@
 #include <iomanip>
 
 OpenGLWindow::OpenGLWindow(int width, int height, const std::string &title) :
-    m_pauseRendering {false}
+    m_pauseRendering {false},
+    m_frameCounter {0},
+    m_fps {0.0}
 {
     // Initialize GLFW
     if (!glfwInit())
@@ -60,9 +62,7 @@ int OpenGLWindow::exec()
     glfwGetWindowSize(m_window, &width, &height);
     resizeGL(width, height);
 
-#ifdef SHOW_DEBUG_INFO
-
-#endif
+    resetFpsCounter();
 
     // Graphics loop
     while (!glfwWindowShouldClose(m_window)) {
