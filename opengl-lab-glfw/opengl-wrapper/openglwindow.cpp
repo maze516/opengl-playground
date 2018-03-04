@@ -27,7 +27,7 @@ OpenGLWindow::OpenGLWindow(int width, int height, const std::string &title) :
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 
-    glfwWindowHint(GLFW_SAMPLES, 4);
+    glfwWindowHint(GLFW_SAMPLES, 16);
 
     // Create window
     m_window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
@@ -131,10 +131,12 @@ void OpenGLWindow::keyReleaseEvent(int key, int mods)
 
 void OpenGLWindow::focusInEvent()
 {
+    m_pauseRendering = false;
 }
 
 void OpenGLWindow::focusOutEvent()
 {
+    m_pauseRendering = true;
 }
 
 void OpenGLWindow::keyCallback(GLFWwindow *window, int key,
@@ -148,7 +150,7 @@ void OpenGLWindow::keyCallback(GLFWwindow *window, int key,
         w->keyPressEvent(key, mods);
     } else if (action == GLFW_RELEASE) {
         DEBUG("OpenGLWindow: released key " << key);
-        w->keyPressEvent(key, mods);
+        w->keyReleaseEvent(key, mods);
     }
 }
 
@@ -174,11 +176,9 @@ void OpenGLWindow::windowFocusCallback(GLFWwindow *window, int focused)
     auto w = static_cast<OpenGLWindow*>(glfwGetWindowUserPointer(window));
     if (focused == GLFW_TRUE) {
         DEBUG("OpenGLWindow: focus in event");
-        w->m_pauseRendering = false;
         w->focusInEvent();
     } else {
         DEBUG("OpenGLWindow: focus out event");
-        w->m_pauseRendering = true;
         w->focusOutEvent();
     }
 }

@@ -4,8 +4,9 @@ project(opengl-lab-glfw)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_CXX_FLAGS
-        "${CMAKE_CXX_FLAGS} -Weverything -Wno-c++98-compat -Wno-padded")
+string(CONCAT EXTRA_CXX_FLAGS "-Weverything "
+        "-Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-padded")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EXTRA_CXX_FLAGS}")
 
 find_package(OpenGL REQUIRED)
 find_package(PkgConfig REQUIRED)
@@ -33,11 +34,19 @@ set(OPENGL_LAB_GLFW_LIBS
         ${CORE_VIDEO_FRAMEWORK})
 
 set(OPENGL_LAB_WRAPPER
-    ../opengl-wrapper/logger.h
-    ../opengl-wrapper/openglwindow.h
-    ../opengl-wrapper/openglwindow.cpp
-    ../opengl-wrapper/simpletimer.h
-    ../opengl-wrapper/glad/src/glad.c)
+        ../opengl-wrapper/logger.h
+        ../opengl-wrapper/openglarraybuffer.h
+        ../opengl-wrapper/openglarraybuffer.cpp
+        ../opengl-wrapper/openglshaderprogram.h
+        ../opengl-wrapper/openglshaderprogram.cpp
+        ../opengl-wrapper/openglwindow.h
+        ../opengl-wrapper/openglwindow.cpp
+        ../opengl-wrapper/simpletimer.h
+        ../opengl-wrapper/openglvertex.h
+        ../opengl-wrapper/openglvertexarray.h
+        ../opengl-wrapper/openglvertexarray.cpp
+        ../opengl-wrapper/glad/src/glad.c)
 
 
 add_subdirectory(01-empty-window)
+add_subdirectory(02-first-triangle)

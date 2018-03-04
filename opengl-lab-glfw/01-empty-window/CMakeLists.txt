@@ -9,4 +9,3 @@ add_executable(01-empty-window
         window.cpp
         main.cpp)
     target_link_libraries(01-empty-window ${OPENGL_LAB_GLFW_LIBS})
-#    target_compile_definitions(01-empty-window PUBLIC -DSHOW_DEBUG_INFO)

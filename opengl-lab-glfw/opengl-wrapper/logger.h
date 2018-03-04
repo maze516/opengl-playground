@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#ifdef SHOW_DEBUG_INFO
+#ifndef NDEBUG
 #define DEBUG(x) do { \
     std::cerr << x << std::endl; \
 } while (0)
