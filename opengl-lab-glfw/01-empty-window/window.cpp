@@ -5,7 +5,7 @@
 void Window::initializeGL()
 {
     OpenGLWindow::initializeGL();
-    glClearColor(0.18f, 0.31f, 0.31f, 1.0f);
+    glClearColor(0.96f, 0.64f, 0.38f, 1.0f);
 }
 
 void Window::paintGL()

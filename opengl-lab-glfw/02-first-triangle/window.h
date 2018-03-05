@@ -20,6 +20,7 @@ protected:
 private:
     OpenGLShaderProgram m_shaderProgram;
     OpenGLVertexArray   m_vertexArray;
-    OpenGLArrayBuffer   m_triangle;
+    OpenGLArrayBuffer   m_shape;
+    int                 m_shapeVertexCount;
     bool                m_wireframe {false};
 };

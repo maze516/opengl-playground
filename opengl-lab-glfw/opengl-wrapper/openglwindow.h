@@ -16,11 +16,16 @@ public:
     OpenGLWindow() : OpenGLWindow(640, 480, "OpenGLWindow") {}
     OpenGLWindow(int width, int height, const std::string &title);
 
+    OpenGLWindow(OpenGLWindow const &x) = delete;
+    void operator=(OpenGLWindow const &x) = delete;
+
     virtual ~OpenGLWindow();
 
     int exec();
 
     void close();
+
+    bool glInitialized() const;
 
 protected:
     virtual void initializeGL();
@@ -34,6 +39,7 @@ protected:
 
 private:
     GLFWwindow          *m_window;
+    bool                m_gladInitialized;
     bool                m_pauseRendering;
 
     SimpleTimer         m_fpsTimer;

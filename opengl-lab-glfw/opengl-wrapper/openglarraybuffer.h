@@ -13,6 +13,10 @@ public:
         StaticDraw = GL_STATIC_DRAW,
     };
 
+    OpenGLArrayBuffer() = default;
+    OpenGLArrayBuffer(OpenGLArrayBuffer const &x) = delete;
+    void operator=(OpenGLArrayBuffer const &x) = delete;
+
     virtual ~OpenGLArrayBuffer();
 
     void setUsage(Usage usage);
@@ -23,6 +27,7 @@ public:
     void unbind();
 
 private:
+
     GLuint              m_vbo {0};
     Usage               m_usage {StaticDraw};
 

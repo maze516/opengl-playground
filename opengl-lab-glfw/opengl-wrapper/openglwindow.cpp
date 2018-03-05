@@ -7,6 +7,7 @@
 #include <iomanip>
 
 OpenGLWindow::OpenGLWindow(int width, int height, const std::string &title) :
+    m_gladInitialized {false},
     m_pauseRendering {false},
     m_frameCounter {0},
     m_fps {0.0}
@@ -98,6 +99,11 @@ void OpenGLWindow::close()
     glfwSetWindowShouldClose(m_window, GL_TRUE);
 }
 
+bool OpenGLWindow::glInitialized() const
+{
+    return m_gladInitialized;
+}
+
 void OpenGLWindow::initializeGL()
 {
     assert(m_window);
@@ -108,6 +114,7 @@ void OpenGLWindow::initializeGL()
         throw std::runtime_error("Failed to initialize GLAD!");
     }
 
+    m_gladInitialized = true;
     printOpenGlVersion();
 }
 

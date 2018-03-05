@@ -15,6 +15,10 @@ public:
         Fragment = GL_FRAGMENT_SHADER,
     };
 
+    OpenGLShaderProgram() = default;
+    OpenGLShaderProgram(OpenGLShaderProgram const &x) = delete;
+    void operator=(OpenGLShaderProgram const &x) = delete;
+
     virtual ~OpenGLShaderProgram();
 
     void addShader(Type type, const std::string &fileName);

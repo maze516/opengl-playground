@@ -5,11 +5,8 @@
 class OpenGLVertex
 {
 public:
-    OpenGLVertex(float x, float y, float z) {
-        m_position[0] = x;
-        m_position[1] = y;
-        m_position[2] = z;
-    }
+    constexpr OpenGLVertex(float x, float y, float z) :
+        m_position {{x, y, z}} { }
 
     static constexpr int positionOffset() {
         return offsetof(OpenGLVertex, m_position);

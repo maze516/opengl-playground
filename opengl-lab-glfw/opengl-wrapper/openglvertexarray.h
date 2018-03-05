@@ -13,6 +13,10 @@ public:
         StaticDraw = GL_STATIC_DRAW,
     };
 
+    OpenGLVertexArray() = default;
+    OpenGLVertexArray(OpenGLVertexArray const &x) = delete;
+    void operator=(OpenGLVertexArray const &x) = delete;
+
     virtual ~OpenGLVertexArray();
 
     void bind();
