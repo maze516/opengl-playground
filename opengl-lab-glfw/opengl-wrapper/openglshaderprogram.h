@@ -26,6 +26,9 @@ public:
 
     void use();
 
+    void setUniform(const std::string &name, bool value) const;
+    void setUniform(const std::string &name, float value) const;
+
 private:
     GLuint              m_shaderProgram {0};
     std::list<GLuint>   m_shader;

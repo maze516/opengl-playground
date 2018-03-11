@@ -7,7 +7,6 @@
     std::cerr << x << std::endl; \
 } while (0)
 
-
 #define PRINT_VALUE(x) do {\
     std::cerr << #x << ": " << x << std::endl;\
 } while (0)
@@ -15,3 +14,9 @@
 #define DEBUG(x)
 #define PRINT_VALUE(x)
 #endif
+
+#define INFO(x) do { \
+    std::cerr << x << std::endl; \
+} while (0)
+
+

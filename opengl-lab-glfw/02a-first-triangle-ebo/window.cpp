@@ -14,6 +14,11 @@ static constexpr std::array<OpenGLVertex, 6> SHAPE {{
         OpenGLVertex { 0.25f, -0.50f,  0.00f},
 }};
 
+static constexpr std::array<GLbyte, 6> VERTEX {{
+        0, 1, 2,
+        3, 4, 5,
+}};
+
 void Window::initializeGL()
 {
     OpenGLWindow::initializeGL();
@@ -23,9 +28,16 @@ void Window::initializeGL()
     m_shaderProgram.addShader(OpenGLShaderProgram::Fragment, "shader.fsh");
     m_shaderProgram.link();
 
+    m_shaderProgram2.addShader(OpenGLShaderProgram::Vertex, "shader.vsh");
+    m_shaderProgram2.addShader(OpenGLShaderProgram::Fragment, "shader2.fsh");
+    m_shaderProgram2.link();
+
     m_vertexArray.bind();
+    m_elementArrayBuffer.bind();
     m_shape.bind();
 
+    m_elementArrayBuffer.setBufferData(VERTEX.data(),
+            sizeof(VERTEX));
     m_shape.setBufferData(SHAPE.data(),
             SHAPE.size() * OpenGLVertex::stride());
 
@@ -40,12 +52,17 @@ void Window::initializeGL()
 void Window::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT);
-    m_shaderProgram.use();
     m_vertexArray.bind();
+
+    m_shaderProgram.use();
     if (m_selectedTriangle & 0x01)
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_BYTE, nullptr);
+
+    m_shaderProgram2.use();
     if (m_selectedTriangle & 0x02)
-        glDrawArrays(GL_TRIANGLES, 3, 6);
+        glDrawElementsBaseVertex(GL_TRIANGLES, 3, GL_UNSIGNED_BYTE,
+                nullptr, 3);
+
     m_vertexArray.unbind();
 }
 

@@ -37,6 +37,8 @@ set(OPENGL_LAB_WRAPPER
         ../opengl-wrapper/logger.h
         ../opengl-wrapper/openglarraybuffer.h
         ../opengl-wrapper/openglarraybuffer.cpp
+        ../opengl-wrapper/openglelementarraybuffer.h
+        ../opengl-wrapper/openglelementarraybuffer.cpp
         ../opengl-wrapper/openglshaderprogram.h
         ../opengl-wrapper/openglshaderprogram.cpp
         ../opengl-wrapper/openglwindow.h
@@ -50,3 +52,5 @@ set(OPENGL_LAB_WRAPPER
 
 add_subdirectory(01-empty-window)
 add_subdirectory(02-first-triangle)
+add_subdirectory(02a-first-triangle-ebo)
+add_subdirectory(03-basic-vertex-shader)

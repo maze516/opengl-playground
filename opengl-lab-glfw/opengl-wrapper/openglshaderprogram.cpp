@@ -34,7 +34,8 @@ void OpenGLShaderProgram::addShader(Type type, const std::string &fileName)
         create();
 
     auto shader = glCreateShader(type);
-    auto shaderSourcePtr = loadShaderSource(fileName).c_str();
+    auto shaderSource = loadShaderSource(fileName);
+    auto shaderSourcePtr = shaderSource.c_str();
     glShaderSource(shader, 1, &shaderSourcePtr, nullptr);
 
     glCompileShader(shader);
@@ -42,10 +43,10 @@ void OpenGLShaderProgram::addShader(Type type, const std::string &fileName)
     GLint result;
     glGetShaderiv(shader, GL_COMPILE_STATUS, &result);
     if (!result) {
-        DEBUG("OpenGLShaderProgram: compilation error of shader #" << shader);
-        DEBUG(getShaderCompileError(shader));
-        throw std::runtime_error("OpenGLShaderProgram: compilation error of shader #" +
-                std::to_string(shader));
+        INFO("OpenGLShaderProgram: compilation error of shader #" <<
+                shader << " [" << fileName << "]");
+        INFO(getShaderCompileError(shader));
+        throw std::runtime_error("OpenGLShaderProgram compilation error");
     }
 
     m_shader.push_back(shader);
@@ -68,10 +69,9 @@ void OpenGLShaderProgram::link()
     GLint result;
     glGetProgramiv(m_shaderProgram, GL_LINK_STATUS, &result);
     if (!result) {
-        DEBUG("OpenGLShaderProgram: link error of program #" << m_shaderProgram);
-        DEBUG(getProgramLinkError(m_shaderProgram));
-        throw std::runtime_error("OpenGLShaderProgram: link error of program #" +
-                std::to_string(m_shaderProgram));
+        INFO("OpenGLShaderProgram: link error of program #" << m_shaderProgram);
+        INFO(getProgramLinkError(m_shaderProgram));
+        throw std::runtime_error("OpenGLShaderProgram: link error");
     }
 
     DEBUG("OpenGLShaderProgram: linked program #" << m_shaderProgram);
@@ -87,6 +87,30 @@ void OpenGLShaderProgram::use()
                 std::to_string(m_shaderProgram) + " is not linked");
 
     glUseProgram(m_shaderProgram);
+}
+
+void OpenGLShaderProgram::setUniform(const std::string &name, bool value) const
+{
+    assert(m_shaderProgram);
+
+    auto location = glGetUniformLocation(m_shaderProgram, name.c_str());
+    if (location < 0)
+        throw std::runtime_error("OpenGLShaderProgram: program #" +
+                std::to_string(m_shaderProgram) + " has no uniform '" +
+                name + "'");
+    glUniform1i(location, static_cast<int>(value));
+}
+
+void OpenGLShaderProgram::setUniform(const std::string &name, float value) const
+{
+    assert(m_shaderProgram);
+
+    auto location = glGetUniformLocation(m_shaderProgram, name.c_str());
+    if (location < 0)
+        throw std::runtime_error("OpenGLShaderProgram: program #" +
+                std::to_string(m_shaderProgram) + " has no uniform '" +
+                name + "'");
+    glUniform1f(location, value);
 }
 
 void OpenGLShaderProgram::create()

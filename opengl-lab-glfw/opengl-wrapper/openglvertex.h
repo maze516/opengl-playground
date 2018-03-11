@@ -16,6 +16,18 @@ public:
         return sizeof(OpenGLVertex);
     }
 
+    constexpr float x() const {
+        return m_position[0];
+    }
+
+    constexpr float y() const {
+        return m_position[1];
+    }
+
+    constexpr float z() const {
+        return m_position[2];
+    }
+
 private:
     static constexpr size_t         VERTEX_SIZE {3};
     std::array<float, VERTEX_SIZE>  m_position;

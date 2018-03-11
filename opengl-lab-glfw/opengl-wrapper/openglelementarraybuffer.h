@@ -7,17 +7,17 @@
 
 #include <string>
 
-class OpenGLArrayBuffer {
+class OpenGLElementArrayBuffer {
 public:
     enum Usage : GLenum {
         StaticDraw = GL_STATIC_DRAW,
     };
 
-    OpenGLArrayBuffer() = default;
-    OpenGLArrayBuffer(OpenGLArrayBuffer const &x) = delete;
-    void operator=(OpenGLArrayBuffer const &x) = delete;
+    OpenGLElementArrayBuffer() = default;
+    OpenGLElementArrayBuffer(OpenGLElementArrayBuffer const &x) = delete;
+    void operator=(OpenGLElementArrayBuffer const &x) = delete;
 
-    virtual ~OpenGLArrayBuffer();
+    virtual ~OpenGLElementArrayBuffer();
 
     void setUsage(Usage usage);
 
@@ -27,7 +27,7 @@ public:
     void unbind();
 
 private:
-    GLuint              m_vbo {0};
+    GLuint              m_ebo {0};
     Usage               m_usage {StaticDraw};
 
     void create();
