@@ -2,7 +2,7 @@
 
 int main(void)
 {
-    Window window(640, 480, "02 - First Triangle");
+    Window window(640, 480, "03 - Basic Vertex Shader");
 
     return window.exec();
 }

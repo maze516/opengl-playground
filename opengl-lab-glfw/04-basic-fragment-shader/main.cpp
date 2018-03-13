@@ -2,7 +2,7 @@
 
 int main(void)
 {
-    Window window(640, 480, "02a - First Triangle EBO");
+    Window window(640, 480, "04 - Basic Fragment Shader");
 
     return window.exec();
 }

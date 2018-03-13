@@ -1,6 +1,9 @@
 #include "window.h"
 
+#include <QDataStream>
 #include <QDebug>
+#include <QDir>
+#include <QFile>
 #include <QKeyEvent>
 
 #include <array>
@@ -83,6 +86,33 @@ void Window::initializeGL()
     m_vertexArrayObject.release();
     m_vertexBufferObject.release();
     m_shaderProgram.release();
+
+    // ** Test debug messages ** //
+    qDebug().noquote().nospace() << "SHAPE vertices:";
+    for (size_t i = 0; i < SHAPE.size(); ++i)
+        qDebug().noquote().nospace() << "[" << i << "]: " << SHAPE[i];
+
+    // ** Test data serialization ** //
+    {
+        QFile file(QDir::tempPath() + QDir::separator() + "vertex.bin");
+        file.open(QIODevice::WriteOnly);
+        QDataStream out(&file);
+        for (const auto &x: SHAPE)
+            out << x;
+        file.close();
+    }
+    {
+        qDebug().noquote().nospace() << "Serialized SHAPE vertices:";
+        QFile file(QDir::tempPath() + QDir::separator() + "vertex.bin");
+        file.open(QIODevice::ReadOnly);
+        QDataStream in(&file);
+        Vertex v;
+        for (size_t i = 0; i < SHAPE.size(); ++i) {
+            in >> v;
+            qDebug().noquote().nospace() << "[" << i << "]: " << v;
+        }
+        file.close();
+    }
 }
 
 void Window::resizeGL(int width, int height)

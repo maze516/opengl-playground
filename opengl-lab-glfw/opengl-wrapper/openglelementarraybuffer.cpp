@@ -30,7 +30,7 @@ void OpenGLElementArrayBuffer::setBufferData(const void *data, long count)
 
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, count, data, m_usage);
     DEBUG("OpenGLElementArrayBuffer: filled EBO #" << m_ebo <<
-            " with " << count << "bytes");
+            " with " << count << " bytes");
 }
 
 void OpenGLElementArrayBuffer::bind()

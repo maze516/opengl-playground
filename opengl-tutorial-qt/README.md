@@ -1,5 +1,5 @@
 # opengl-tutorial-qt
-My take on some OpenGL tutorial with Qt by Trent Reed.
+My take on some OpenGL tutorials with Qt by Trent Reed.
 
 # References
 * [http://www.trentreed.net/topics/qt-framework/](http://www.trentreed.net/topics/qt-framework/)

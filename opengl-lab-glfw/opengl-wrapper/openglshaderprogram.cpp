@@ -113,6 +113,20 @@ void OpenGLShaderProgram::setUniform(const std::string &name, float value) const
     glUniform1f(location, value);
 }
 
+void OpenGLShaderProgram::setUniform(const std::string &name, float x,
+        float y, float z) const
+{
+    assert(m_shaderProgram);
+
+    auto location = glGetUniformLocation(m_shaderProgram, name.c_str());
+    if (location < 0)
+        throw std::runtime_error("OpenGLShaderProgram: program #" +
+                std::to_string(m_shaderProgram) + " has no uniform '" +
+                name + "'");
+    glUniform3f(location, x, y, z);
+
+}
+
 void OpenGLShaderProgram::create()
 {
     m_shaderProgram = glCreateProgram();

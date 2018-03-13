@@ -30,7 +30,7 @@ void OpenGLArrayBuffer::setBufferData(const void *data, long count)
 
     glBufferData(GL_ARRAY_BUFFER, count, data, m_usage);
     DEBUG("OpenGLArrayBuffer: filled VBO #" << m_vbo <<
-            " with " << count << "bytes");
+            " with " << count << " bytes");
 }
 
 void OpenGLArrayBuffer::bind()

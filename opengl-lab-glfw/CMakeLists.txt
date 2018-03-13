@@ -37,16 +37,17 @@ set(OPENGL_LAB_WRAPPER
         ../opengl-wrapper/logger.h
         ../opengl-wrapper/openglarraybuffer.h
         ../opengl-wrapper/openglarraybuffer.cpp
+        ../opengl-wrapper/openglcolorvertex.h
         ../opengl-wrapper/openglelementarraybuffer.h
         ../opengl-wrapper/openglelementarraybuffer.cpp
         ../opengl-wrapper/openglshaderprogram.h
         ../opengl-wrapper/openglshaderprogram.cpp
+        ../opengl-wrapper/openglvertexarray.h
+        ../opengl-wrapper/openglvertexarray.cpp
+        ../opengl-wrapper/openglvertex.h
         ../opengl-wrapper/openglwindow.h
         ../opengl-wrapper/openglwindow.cpp
         ../opengl-wrapper/simpletimer.h
-        ../opengl-wrapper/openglvertex.h
-        ../opengl-wrapper/openglvertexarray.h
-        ../opengl-wrapper/openglvertexarray.cpp
         ../opengl-wrapper/glad/src/glad.c)
 
 
@@ -54,3 +55,4 @@ add_subdirectory(01-empty-window)
 add_subdirectory(02-first-triangle)
 add_subdirectory(02a-first-triangle-ebo)
 add_subdirectory(03-basic-vertex-shader)
+add_subdirectory(04-basic-fragment-shader)
